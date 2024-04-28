@@ -1,3 +1,4 @@
+// This code builds a linked list from scratch
 class Node {
   constructor(data) {
     this.data = data;
@@ -264,5 +265,9 @@ function runEmptyLinkedList() {
   emptyList.insertAt(9000, 2); // displays an error since index 2 is out of bounds
 }
 
+console.log("# The results below are being run with a regular linked list #");
 runLinkedList();
-// runEmptyLinkedList();
+console.log(
+  "# The results below are being run with a linked list that is always empty #"
+);
+runEmptyLinkedList();
