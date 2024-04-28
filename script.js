@@ -193,7 +193,7 @@ class LinkedList {
 
   removeAt(index) {
     // Check if the index is out of bounds
-    if (index < 0 || index > this.length) {
+    if (index < 0 || index >= this.length) {
       console.log(`Index ${index} is out of bounds.`);
       return;
     }
@@ -204,7 +204,28 @@ class LinkedList {
       return;
     }
 
-    // If our tree holds more than one node and we are not targeting the tail
+    let currentNode = this.head;
+    let previousNode = null;
+    let currentIndex = 0;
+
+    // If our tree is not empty, but we are targeting the head
+    if (index == 0) {
+      currentNode = currentNode.next;
+
+      this.head = currentNode;
+      this.length--;
+      return;
+    }
+
+    // If our tree holds more than one node and we are not targeting neither tail or head
+    while (currentNode && currentIndex < index) {
+      previousNode = currentNode;
+      currentNode = currentNode.next;
+      currentIndex++;
+    }
+
+    previousNode.next = currentNode.next;
+    this.length--;
   }
 }
 
@@ -223,10 +244,11 @@ function runLinkedList() {
   list.size(); // displays the linked list length, which is currently 3
   list.showHead(); // displays the list's head, which is currently (5)
   list.showTail(); // displays the list's tail, which is currently (20)
-  list.pop(); // removes the lits's tail
+  list.pop(); // removes the lists's tail
   list.append(20); // adds a new node of 20 to the end of our list
   list.insertAt(999, 1); // inserts the value of 999 at index 1
-  list.toString(); // displays our list in the console, which should be (5) -> (999) -> (10) -> (20) -> null
+  list.removeAt(0); // removes the list's head (5)
+  list.toString(); // displays our list in the console, which should be (999) -> (10) -> (20) -> null
 }
 
 // We also run them with an empty list
